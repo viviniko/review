@@ -1,0 +1,53 @@
+<?php
+
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateReviewTable extends Migration
+{
+    /**
+     * @var string
+     */
+    protected $reviewsTable;
+
+    /**
+     * CreateCatalogTable constructor.
+     */
+    public function __construct()
+    {
+        $this->reviewsTable = Config::get('review.reviews_table');
+    }
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // Create table for storing reviews
+        Schema::create($this->reviewsTable, function (Blueprint $table) {
+            $table->increments('id');
+            $table->morphs('reviewable');
+            $table->string('content');
+            $table->unsignedInteger('user_id');
+            $table->string('nickname', 32);
+            $table->unsignedTinyInteger('rating');
+            $table->string('ip', 45);
+            $table->boolean('is_approved')->default(false);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists($this->reviewsTable);
+    }
+}
