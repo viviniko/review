@@ -19,6 +19,16 @@
             "Viviniko\\Review": "src"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Viviniko\\Review\\ReviewServiceProvider"
+            ],
+            "aliases": {
+                "Review": "Viviniko\\Review\\Facades\\Review"
+            }
+        }
+    },
     "minimum-stability": "dev",
 	"prefer-stable": true
 }
