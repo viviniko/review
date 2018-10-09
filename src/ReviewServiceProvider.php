@@ -39,7 +39,9 @@ class ReviewServiceProvider extends BaseServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/review.php', 'review');
 
-        $this->registerReviewService();
+
+
+        $this->registerServices();
 
         $this->registerCommands();
     }
@@ -56,16 +58,24 @@ class ReviewServiceProvider extends BaseServiceProvider
         });
     }
 
+    protected function registerRepository()
+    {
+        $this->app->singleton(
+            \Viviniko\Review\Repositories\ReviewRepository::class,
+            \Viviniko\Review\Repositories\EloquentReview::class
+        );
+    }
+
     /**
      * Register the user service provider.
      *
      * @return void
      */
-    protected function registerReviewService()
+    protected function registerServices()
     {
         $this->app->singleton(
-            \Viviniko\Review\Contracts\ReviewService::class,
-            \Viviniko\Review\Services\Review\EloquentReview::class
+            \Viviniko\Review\Services\ReviewService::class,
+            \Viviniko\Review\Services\ReviewServiceImpl::class
         );
     }
 
@@ -77,7 +87,7 @@ class ReviewServiceProvider extends BaseServiceProvider
     public function provides()
     {
         return [
-            \Viviniko\Review\Contracts\ReviewService::class,
+            \Viviniko\Review\Services\ReviewService::class,
         ];
     }
 }

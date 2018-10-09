@@ -1,17 +1,19 @@
 <?php
 
-namespace Viviniko\Review\Contracts;
+namespace Viviniko\Review\Services;
 
 interface ReviewService
 {
     /**
-     * Paginate reviews.
+     * Paginate the given query into a simple paginator.
      *
-     * @param mixed $query
-     *
-     * @return \Common\Repository\Builder
+     * @param null $perPage
+     * @param string $searchName
+     * @param null $search
+     * @param null $order
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function search($query);
+    public function paginate($perPage, $searchName = null, $search = null, $order = null);
 
     /**
      * Find review by its id.
