@@ -11,8 +11,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "illuminate/support": "~5.0",
+        "php": "^7.2",
         "viviniko/repository": "dev-master",
         "viviniko/support": "dev-master"
     },
